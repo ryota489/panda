@@ -2,6 +2,11 @@
 #include ".\Library\GameObject.h"
 #include "global.h"
 #include "Player.h"
+#include "EnemyState.h"
+#include "PatrolState.h"
+#include "ChaseState.h"
+#include "AttackState.h"
+#include "SearchState.h"
 
 enum class PandaState
 {
@@ -23,18 +28,25 @@ public:
 	{
 		player_ = player;
 	}
+	bool CanSeePlayer();
+	void ChangeState(PandaState newState);
+	void SetRandomDirection();
+	Player* GetPlayer() const;
+	Point GetPosition() const;
+	void SetDirection(DIR dir);
+	int DistanceToPlayer();
 
 private:
 	int hImage_;//画像ID
 	Point pos_;//位置
 	DIR dir_;//移動方向
 	Player* player_ = nullptr;
-	PandaState state_ = PandaState::Patrol;
 
 	//タイマー
 	float dir_timer_;
 	float prog_timer_;
 	float searchTimer_;
+	float move_timer = 0.5f;
 
 	//アニメーション
 	float animTimer_;
@@ -43,23 +55,22 @@ private:
 	// 視野
 	float radius_;
 	float fov_;
-
-	//ステート
-	void Patrol();
-	void Chase();
-	void Attack();
-	void Search();
-
 	
 	// 内部処理
-	bool CanSeePlayer();
-	int DistanceToPlayer();
 	bool SearchFinished();
 	void UpdatePatrol();
 	void UpdateChase();
 	void MoveForward();
 	void DrawFan(Point pos, float directionRad, float radius, float fov, int div);
-	
+	void DrawVision();
+
+	//ステート
+	EnemyState* currentState_ = nullptr;
+	PandaState state_ = PandaState::Patrol;
+	PatrolState patrolState_;
+	ChaseState chaseState_;
+	AttackState attackState_;
+	SearchState searchState_;
 };
 
 

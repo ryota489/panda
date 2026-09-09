@@ -60,6 +60,11 @@
     <ClCompile Include="Stage.cpp">
       <Filter>PlayScene</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyState.cpp" />
+    <ClCompile Include="PatrolState.cpp" />
+    <ClCompile Include="ChaseState.cpp" />
+    <ClCompile Include="AttackState.cpp" />
+    <ClCompile Include="SearchState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -132,6 +137,11 @@
     <ClInclude Include="Stage.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyState.h" />
+    <ClInclude Include="PatrolState.h" />
+    <ClInclude Include="ChaseState.h" />
+    <ClInclude Include="AttackState.h" />
+    <ClInclude Include="SearchState.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
